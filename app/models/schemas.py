@@ -5,7 +5,7 @@ class QueryRequest(BaseModel):
     query: str = Field(..., example="Get all transactions where amount is greater than 300")
 
 class QueryResponse(BaseModel):
-    query: str = Field(..., example="Get all transactions where amount is greater than 300")
+    query: str = Field(..., example="SELECT * FROM transactions WHERE amount > 300;")
     data: Optional[List[Dict[str, Any]]] = Field(example=[
         {
             "id": 102,
