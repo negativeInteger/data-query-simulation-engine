@@ -4,10 +4,13 @@ from app.api.query_routes import query_router
 from app.api.auth_routes import auth_router
 
 app = FastAPI(
-        title="Data Query Simulation Engine",  # Custom title
-        description="A simple API to query and validate data.",  # Optional description
-        version="1.0.0"  # Version number
-    )
+    title="Data Query Simulation Engine",
+    description=(
+        "A FastAPI-based service that converts natural language queries into pseudo-SQL. "
+        "It provides explanations, validates query feasibility, and ensures secure API access with API key authentication."
+    ),
+    version="1.0.0",
+)
 
 # Include API routes
 app.include_router(auth_router)
