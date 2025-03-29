@@ -60,6 +60,8 @@ curl -X POST "http://localhost:8000/api/query" \
      -H "Content-Type: application/json" \
      -d '{"query": "Get all transactions"}'
 ```
+## **Database**
+- Used in memory users.json file to store email and generated api-key.
 
 ## 🌐 API Endpoints & Responses
 
