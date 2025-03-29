@@ -33,8 +33,25 @@ Once the server is running, you can access interactive API documentation at:
 - **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
 - **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
+### **.env Setup**  
+Make sure to include a `.env` file in the root directory of the project. To do so, copy the `.env.example` file to `.env` using the following command:
+
+```
+cp .env.example .env
+```
+
+Then, add your secret key for API key management in the `.env` file:
+
+```
+SECRET_KEY=your-secret-key-here
+```
+
+This secret key is used to sign and verify the JWT API keys.
+
+---
+
 ## 🔑 API Key Authentication
-Users must generate an API key before accessing protected endpoints. API keys are provided during **signup** and must be included in requests via headers:
+Users must generate an API key before accessing protected endpoints. API keys are created using JWT (JSON Web Tokens) and stored securely. The secret key used for signing the JWTs is configured in the .env file.
 
 ### **1️⃣ User Signup (`POST /api/auth/signup`)**
 Registers a new user and returns an API key.
