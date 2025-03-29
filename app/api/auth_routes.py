@@ -28,7 +28,7 @@ authenticated_users: List[CreatedUser] = load_users()
 
 auth_router = APIRouter()
 
-@auth_router.post("api/auth/signup", response_model=CreatedUser, status_code=201, tags=['SignUp'])
+@auth_router.post("/api/auth/signup", response_model=CreatedUser, status_code=201, tags=['SignUp'])
 def signup(new_user: User):
     if not new_user.email:
         raise HTTPException(status_code=400, detail="Email is required")
