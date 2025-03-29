@@ -56,7 +56,7 @@ Registers a new user and returns an API key.
 Include the API key in the request header:
 ```sh
 curl -X POST "http://localhost:8000/api/query" \
-     -H "Authorization: Bearer abcd1234efgh5678" \
+     -H "X-API-KEY: abcd1234efgh5678abcd1234efgh5678" \
      -H "Content-Type: application/json" \
      -d '{"query": "Get all transactions"}'
 ```
