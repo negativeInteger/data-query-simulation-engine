@@ -218,6 +218,3 @@ Checks if the query is referencing a supported dataset.
   "valid": true
 }
 ```
-
-## 📜 License
-This project is open-source and available under the MIT License.
