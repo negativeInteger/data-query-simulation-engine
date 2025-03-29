@@ -1,9 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from app.api.routes import router
-from dotenv import load_dotenv
-
-load_dotenv()
+from app.api.query_routes import query_router
+from app.api.auth_routes import auth_router
 
 app = FastAPI(
         title="Data Query Simulation Engine",  # Custom title
@@ -12,7 +10,8 @@ app = FastAPI(
     )
 
 # Include API routes
-app.include_router(router)
+app.include_router(query_router)
+app.include_router(auth_router)
 
 # Root Endpoint
 @app.get("/", response_class=HTMLResponse, tags=['Root'])

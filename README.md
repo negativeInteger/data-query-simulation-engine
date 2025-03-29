@@ -1,147 +1,204 @@
-# 🧠 Data Query Simulation Engine
+# Data Query Simulation Engine
 
-🚀 A lightweight backend service that simulates an AI-powered **natural language data query system**, converting simple text queries into pseudo-SQL and returning mock responses.
+## 📖 Overview
+The **Data Query Simulation Engine** is a simple FastAPI-based service that processes natural language queries and translates them into structured pseudo-SQL queries with mock data. It supports:
+- **Filtering** (`WHERE` conditions)
+- **Sorting** (`ORDER BY`)
+- **Aggregation** (`SUM() calculations`)
+- **Query Explanation & Validation**
+- **API Key Authentication**
 
-## 📌 Features
-- ✅ Accepts **natural language queries** and converts them to pseudo-SQL.
-- ✅ Provides an **explanation of the query** structure.
-- ✅ Validates the feasibility of a given query.
-- ✅ Implements **lightweight authentication** via API key.
-- ✅ Proper **error handling** and structured API responses.
+## 🚀 Features
+- Convert natural language queries into structured pseudo-SQL.
+- Return mock data based on the query.
+- Validate and explain queries before processing.
+- Secure API access using API keys.
+- Interactive API documentation with **Swagger UI** and **ReDoc**.
 
----
+## 🏗️ Installation
+```sh
+# Clone the repository
+git clone https://github.com/negativeInteger/data-query-simulation-engine.git
+cd data-query-simulation-engine
 
-## 📂 Project Structure
+# Install dependencies
+uv pip install -r requirements.txt
 
-```
-📦 data-query-simulation-engine
-│── 📂 app
-│   ├── main.py             # FastAPI application
-│   ├── database.py         # Mock database connection
-│   ├── query_processor.py  # Converts text queries to pseudo-SQL
-│   ├── auth.py             # API key authentication middleware
-│   ├── routes.py           # API routes
-│── 📂 tests
-│   ├── test_api.py         # API endpoint test cases
-│── requirements.txt        # Dependencies
-│── README.md               # Documentation
-│── .gitignore              # Git ignore file
-```
-
----
-
-## 🚀 **Setup Instructions**
-### 1️⃣ **Clone the Repository**
-```bash
-git clone https://github.com/your-username/mini-data-query-engine.git
-cd mini-data-query-engine
+# Run the FastAPI server
+uvicorn app.main:app --host localhost --port 8000
 ```
 
-### 2️⃣ **Create a Virtual Environment**
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+## 🌐 API Documentation
+Once the server is running, you can access interactive API documentation at:
+- **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
-### 3️⃣ **Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
+## 🔑 API Key Authentication
+Users must generate an API key before accessing protected endpoints. API keys are provided during **signup** and must be included in requests via headers:
 
-### 4️⃣ **Run the FastAPI Server**
-```bash
-uvicorn app.main:app --reload
-```
+### **1️⃣ User Signup (`POST /api/auth/signup`)**
+Registers a new user and returns an API key.
 
-### 5️⃣ **Access API Documentation (Swagger UI)**
-- Open: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
----
-
-## 📌 **API Endpoints**
-### 1️⃣ **POST `/query`** → Convert natural language query to pseudo-SQL  
-**Request:**
+#### 🔹 **Request**
 ```json
 {
-  "query": "Show me total sales for the last month"
+  "email": "user1@example.com",
 }
 ```
-**Response:**
+#### 🔹 **Response**
 ```json
 {
-  "query": "SELECT SUM(sales) FROM sales_data WHERE date >= '2024-02-01'",
-  "result": 125000
+  "api_key": "abcd1234efgh5678abcd1234efgh5678"
 }
 ```
 
-### 2️⃣ **POST `/explain`** → Explain query structure  
-**Request:**
-```json
-{
-  "query": "Get the top 5 best-selling products"
-}
-```
-**Response:**
-```json
-{
-  "query": "SELECT product_name, SUM(quantity) AS total_sold FROM sales_data GROUP BY product_name ORDER BY total_sold DESC LIMIT 5",
-  "explanation": "Retrieves the top 5 products based on sales volume."
-}
+### **2️⃣ Using API Key**
+Include the API key in the request header:
+```sh
+curl -X POST "http://localhost:8000/api/query" \
+     -H "Authorization: Bearer abcd1234efgh5678" \
+     -H "Content-Type: application/json" \
+     -d '{"query": "Get all transactions"}'
 ```
 
-### 3️⃣ **POST `/validate`** → Validate query feasibility  
-**Request:**
-```json
-{
-  "query": "Find the total revenue by region"
-}
-```
-**Response:**
-```json
-{
-  "query": "SELECT region, SUM(revenue) FROM sales_data GROUP BY region",
-  "valid": true,
-  "reason": "Query is valid and can be executed."
-}
-```
+## 🌐 API Endpoints & Responses
 
-### 4️⃣ **Authentication**
-Add API Key in the request header:
-```http
-X-API-KEY: mysecureapikey
+### **3️⃣ Process Query (`POST /api/query`)**  
+Convert a **natural language query** into a **pseudo-SQL query** and return mock data.  
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "Get all transactions"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "query": "SELECT * FROM transactions;",
+  "data": [
+    {"id": 101, "amount": 250, "status": "completed"},
+    {"id": 102, "amount": 500, "status": "pending"}
+  ]
+}
 ```
 
 ---
 
-## ✅ **Running Tests**
-```bash
-pytest tests/
+### **4️⃣ Process Query with Filtering (`POST /api/query`)**  
+Applies **WHERE** filtering based on user query.  
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "Get all transactions where amount is greater than 300"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "query": "SELECT * FROM transactions WHERE amount > 300;",
+  "data": [
+    {"id": 102, "amount": 500, "status": "pending"}
+  ]
+}
 ```
 
 ---
 
-## 🌍 **Deployment on Render**
-1. **Push code to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-2. **Go to [Render](https://render.com/)**
-3. **Create a new Web Service**
-4. **Select the GitHub repo**
-5. **Set the Start Command:**
-   ```bash
-   uvicorn app.main:app --host 0.0.0.0 --port 10000
-   ```
-6. **Deploy & Get API URL**
+### **5️⃣ Process Query with Sorting (`POST /api/query`)**  
+Applies **ORDER BY** sorting based on user query.  
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "Sort sales by region in ascending order"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "query": "SELECT * FROM sales ORDER BY region ASC;",
+  "data": [
+    {"id": 1, "region": "North", "revenue": 5000},
+    {"id": 2, "region": "South", "revenue": 3000}
+  ]
+}
+```
 
 ---
 
-## 🎯 **Contributing**
-Feel free to submit PRs or raise issues!
+### **6️⃣ Process Query with Aggregation (`POST /api/query`)**  
+Calculates **SUM()** for a numeric field.  
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "What is the total revenue by sales?"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "query": "SELECT SUM(revenue) FROM sales;",
+  "data": [
+    {"total": 8000}
+  ]
+}
+```
 
 ---
 
-## 📜 **License**
-MIT License © 2025 Your Name
+### **7️⃣ Explain Query (`POST /api/explain`)**  
+Breaks down a natural query into its components.  
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "Get all transactions where amount is greater than 300"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "action": "fetch",
+  "table": "transactions",
+  "filter": "amount greater than 300",
+  "sort": null,
+  "aggregation": null
+}
+```
+
+---
+
+### **8️⃣ Validate Query (`POST /api/validate`)**  
+Checks if the query is referencing a supported dataset.  
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "Get all customers"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "valid": false
+}
+```
+
+#### 🔹 **Request**  
+```json
+{
+  "query": "Get all sales"
+}
+```
+#### 🔹 **Response**  
+```json
+{
+  "valid": true
+}
+```
+
+## 📜 License
+This project is open-source and available under the MIT License.
