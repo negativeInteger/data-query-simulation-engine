@@ -6,15 +6,27 @@ class QueryRequest(BaseModel):
 
 class QueryResponse(BaseModel):
     query: str = Field(..., example="Get all transactions where amount is greater than 300")
-    data: Optional[List[Dict[str, Any]]] = Field(default=[], example=[{"id": 1, "amount": 500}])
+    data: Optional[List[Dict[str, Any]]] = Field(example=[
+        {
+            "id": 102,
+            "amount": 500,
+            "status": "pending"
+        }
+    ])
 
 class ExplainResponse(BaseModel):
-    query: str = Field(..., example="Sort sales by region in ascending order")
-    breakdown: Dict[str, Optional[str]] = Field(..., example={"operation": "sort", "field": "region", "order": "ascending"})
+    query: str = Field(..., example="Get all transactions where amount is greater than 300")
+    breakdown: Dict[str, Optional[str]] = Field(..., example={
+        "action": "fetch",
+        "table": "transactions",
+        "filter": "amount greater than 300",
+        "sort": None,
+        "aggregation": None
+    })
 
 class ValidateResponse(BaseModel):
-    query: str = Field(..., example="Get all customers")
-    valid: bool = Field(..., example=False)
+    query: str = Field(..., example="Get all transactions where amount is greater than 300")
+    valid: bool = Field(..., example=True)
 
 class User(BaseModel):
     email: str = Field(..., example="testuser@example.com")

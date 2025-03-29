@@ -1,4 +1,10 @@
 [
-    "email": "dummy@email.com",
-    "api_key": "a-dummy-api-key"
+    {
+        "email": "test@gmail.com",
+        "api_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiZXhwIjoxNzQ1ODY4NTAyfQ.xuQr-3PyUMPGvnzr5pyFWVyBidX2PtWRXfxuO9jfN3w"
+    },
+    {
+        "email": "testuser@example.com",
+        "api_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ1ODY5NjMwfQ.sC3-81vPp-TYAwW4W-VWwScEIX3m3ZYfXkwJfqSplQ0"
+    }
 ]
