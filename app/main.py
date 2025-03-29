@@ -10,8 +10,8 @@ app = FastAPI(
     )
 
 # Include API routes
-app.include_router(query_router)
 app.include_router(auth_router)
+app.include_router(query_router)
 
 # Root Endpoint
 @app.get("/", response_class=HTMLResponse, tags=['Root'])
