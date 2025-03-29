@@ -1,3 +1,6 @@
 [
-    
+    {
+        "email": "man@example.com",
+        "api_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NTg2NTAzN30.Wp6_B90UGzFefCdhuW3vR8__RR4wUCMwzJ8XCK3Y7bw"
+    }
 ]

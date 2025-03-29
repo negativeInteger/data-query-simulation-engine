@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "b193f79e-3234-4aa3-89a9-e5b69298342d",
+		"name": "Data Query Simulation Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31669266"
+	},
+	"item": [
+		{
+			"name": "User Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@example.com\"\r\n}"
+				},
+				"url": {
+					"raw": "https://data-query-simulation-engine-xqkk.onrender.com/api/auth/signup",
+					"protocol": "https",
+					"host": [
+						"data-query-simulation-engine-xqkk",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Process Query",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"Get all transactions where amount is greater than 300\"\r\n}"
+				},
+				"url": {
+					"raw": "https://data-query-simulation-engine-xqkk.onrender.com/api/query",
+					"protocol": "https",
+					"host": [
+						"data-query-simulation-engine-xqkk",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Explain Query",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"Sort sales by region in ascending order\"\r\n}"
+				},
+				"url": {
+					"raw": "https://data-query-simulation-engine-xqkk.onrender.com/api/explain",
+					"protocol": "https",
+					"host": [
+						"data-query-simulation-engine-xqkk",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"explain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Query",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"Get all customers\"\r\n}"
+				},
+				"url": {
+					"raw": "https://data-query-simulation-engine-xqkk.onrender.com/api/validate",
+					"protocol": "https",
+					"host": [
+						"data-query-simulation-engine-xqkk",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
