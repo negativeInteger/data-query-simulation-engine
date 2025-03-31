@@ -1,5 +1,6 @@
 import re
 
+# Mock data to simulate database tables
 mock_data = {
     "sales": [
         {"id": 1, "region": "North", "revenue": 5000},
@@ -15,7 +16,7 @@ def process_query(natural_query: str):
     """Convert a natural language query into pseudo-SQL and return mock data."""
     natural_query = natural_query.lower()
 
-    # Identify table
+    # Identify table from query
     table = None
     for tbl in mock_data.keys():
         if tbl in natural_query:
@@ -32,9 +33,11 @@ def process_query(natural_query: str):
     if filter_match:
         column, operator, value = filter_match.groups()
         value = int(value)
+        # Map natural language operators to SQL operators
         operator_map = {"greater than": ">", "smaller than": "<", "equal to": "="}
         sql_operator = operator_map.get(operator, "=")
         sql_query += f" WHERE {column} {sql_operator} {value}"
+        # Apply filtering on mock data
         mock_result = [row for row in mock_result if eval(f"row.get('{column}', 0) {sql_operator} {value}")]
 
      # Extract sorting (e.g., "sort sales by region in ascending order")
@@ -44,6 +47,7 @@ def process_query(natural_query: str):
         if table_match == table:  # Ensure sorting is applied to the correct table
             order_desc = order == "descending"
             sql_query += f" ORDER BY {column} {order.upper()}"
+            # Apply sorting on mock data
             mock_result = sorted(mock_result, key=lambda x: x.get(column, ""), reverse=order_desc)
 
      # Extract aggregation (e.g., "What is the total revenue by sales?")
@@ -67,7 +71,7 @@ def explain_query(natural_query: str):
         "aggregation": None
     }
 
-    # Identify table
+    # Identify table from the query
     for tbl in mock_data.keys():
         if tbl in natural_query:
             components["table"] = tbl
@@ -100,4 +104,5 @@ def explain_query(natural_query: str):
 def validate_query(natural_query: str) -> bool:
     """Check if the query references a supported dataset and follows a valid structure."""
     natural_query = natural_query.lower()
+    # Ensure at least one known table is mentioned in the query
     return any(tbl in natural_query for tbl in mock_data.keys())

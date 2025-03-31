@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from app.api.query_routes import query_router
 from app.api.auth_routes import auth_router
 
+# Initialize FastAPI app
 app = FastAPI(
     title="Data Query Simulation Engine",
     description=(
@@ -16,11 +17,12 @@ app = FastAPI(
 app.include_router(auth_router)
 app.include_router(query_router)
 
-# Root Endpoint
+# Root Endpoint - serves a simple HTML page with a welcome message and link to Swagger docs
 @app.get("/", response_class=HTMLResponse, tags=['Root'])
 def read_root(request: Request):
-
-    base_url = str(request.base_url).rstrip("/")  # Removes trailing "/"
+    """Returns a simple HTML page with welcome text and a link to Swagger docs."""
+    
+    base_url = str(request.base_url).rstrip("/")  # Removes trailing "/" from the base URL
     return f"""
     <!DOCTYPE html>
     <html lang="en">
