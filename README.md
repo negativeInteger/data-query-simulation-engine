@@ -65,7 +65,8 @@ Registers a new user and returns an API key.
 #### 🔹 **Response**
 ```json
 {
-  "api_key": "abcd1234efgh5678abcd1234efgh5678"
+  "email": "user1@example.com",
+  "api_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbmRvbVVzZXJAZXhhbXBsZS5jb20iLCJleHAiOjE3NDYwODAzMTZ9.kmWwhZR0s1qmLqaU_jRXggrVc1wiFOt6uqwgbmXALJI"
 }
 ```
 
